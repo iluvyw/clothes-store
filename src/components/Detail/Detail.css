@@ -1,0 +1,77 @@
+.main-div {
+    background-color: black;
+}
+
+.image-box {
+    border-radius: 10px;
+    width: 20%;
+    height: 500px;
+    overflow: hidden;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.2);
+    margin: 20px 3.125%;
+}
+
+.image-box img {
+    border-radius: 10px;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #eef8ff;
+}
+
+.brand-text {
+    font-size: 50px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 20px 0px;
+    color: wheat;
+}
+
+.title-text {
+    font-size: 50px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0px 0px;
+    color: wheat;
+    padding-top: 20px;
+}
+
+.text {
+    font-size: 30px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 20px 0px;
+    color: wheat;
+}
+
+.remain-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.remain-text {
+    font-size: 30px;
+    color: wheat;
+}
+
+button {
+    font-size: 30px;
+    width: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.plus {
+    margin-right: 20px;
+}
+
+.minus {
+    margin-left: 20px;
+}
