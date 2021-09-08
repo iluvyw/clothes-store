@@ -1,55 +1,43 @@
-import Card from "../Card/Card";
-import './Home.css'
-import Carousel from 'react-elastic-carousel'
+import React, { useEffect, useState } from 'react'
+import CardView from '../CardView/CardView'
+import DropDownList from '../DropDownList/DropDownList'
 import SanityClient from '../../client'
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import './Home.css'
 
-const query = `*[_type == "clothing"]{
-  _id,
-  name,
-  slug,
-  front_image{
-    asset->{
-      _id,
-      url
-    }
-  },
-  back_image{
-    asset->{
-      _id,
-      url
-    }
-  },
-  'brand': brand->.name,
-  remainNumber,
-  'brandLogoUrl': brand->.logo.asset->.url
-}`
+const get_brand_query = `*[_type=="brand"]{name}`
 
-function Home() {
-  const [allCards,setAllCards] = useState(null)
-  const a = 1
+export default function Home() {
+    const [brandList, setBrandList] = useState([])
+    const [selectedBrand, setSelectedBrand] = useState("")
 
-  useEffect(() => {
-    SanityClient.fetch(query)
-    .then((data) => setAllCards(data))
-    .then(console.log(allCards))
-    .catch(console.error)
-  }, [])
+    useEffect(() => {
+        SanityClient.fetch(get_brand_query)
+            .then(data => setBrandList(data))
+        //.then(console.log(selectedBrand))
+    }, [selectedBrand])
 
-  return (
-    <div className="body">
-      <Carousel>
-        {
-          allCards && allCards.map(item => 
-            <Link to={"/"+item.slug.current} key={item.slug.current}>
-              <Card key={item._id} name={item.name} frontImgUrl={item.front_image.asset.url} backImgUrl={item.back_image.asset.url} brand={item.brand} remainNumber={item.remainNumber}/>
-            </Link>
-          )
-        }
-      </Carousel>
-    </div>
-  );
+    return (
+        <div className="background">
+            <section className="drop-down-container">
+                <DropDownList list={brandList} select={setSelectedBrand} />
+            </section>
+            <section>
+                <CardView brand={selectedBrand} />
+            </section>
+            <footer>
+                <a href="https://www.facebook.com/an.phamhoang.1/">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/anpham2408/">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/an-ph%E1%BA%A1m-43203a199/">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/iluvyw">
+                    <i class="fab fa-github"></i>
+                </a>
+            </footer>
+        </div>
+    )
 }
-
-export default Home;
