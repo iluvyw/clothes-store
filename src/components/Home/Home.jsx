@@ -21,7 +21,7 @@ export default function Home() {
             <section className="drop-down-container">
                 <DropDownList list={brandList} select={setSelectedBrand} />
             </section>
-            <section>
+            <section className="card-section">
                 <CardView brand={selectedBrand} />
             </section>
             <footer>

@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import SanityClient from '../../client'
 import './Detail.css'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const settings = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  }
 
 export default function Detail({ match }) {
     const [product,setProduct] = useState(null)
@@ -36,29 +46,23 @@ export default function Detail({ match }) {
     )
     else */
     return (
-        <div className="main-div">
-            <h3 className="title-text">{product && product.name}</h3>
-            <h3 className="brand-text">{product && product.brand}</h3>
-            <div className="image-container">
+        <div className="container">
+            <section className="image-section">
                 <div className="image-box">
-                    <img src={product && product.front_image.asset.url} alt="front"/>
+                    <img className="image" src={product && product.front_image.asset.url} alt="front"/>
                 </div>
                 <div className="image-box">
-                    <img src={product && product.back_image.asset.url} alt="back"/>
+                    <img className="image" src={product && product.back_image.asset.url} alt="back"/>
                 </div>
                 <div className="image-box">
-                    <img src={product && product.front_image.asset.url} alt="front"/>
+                    <img className="image" src={product && product.back_image.asset.url} alt="back"/>
                 </div>
-                <div className="image-box">
-                    <img src={product && product.back_image.asset.url} alt="back"/>
-                </div>
-            </div>
-            <h3 className="text">Remaining Items</h3>
-            <div className="remain-box">
-                <button className="plus">+</button>
+            </section>
+            <section className="info-section">
+                <h3 className="title-text">{product && product.name}</h3>
+                <h3 className="brand-text">{product && product.brand}</h3>
                 <h3 className="remain-text">{product && product.remainNumber}</h3>
-                <button className="minus">-</button>
-            </div>
+            </section>
         </div>
     )
 }

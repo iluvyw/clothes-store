@@ -9,18 +9,18 @@ export default function Card({ name, frontImgUrl, backImgUrl, brand, remainNumbe
                     <div className="img">
                         <img src={frontImgUrl} alt='Sth'/>
                     </div>  
-                    <div className="detail-box">
+                    {/*<div className="detail-box">
                         <h2>{name}</h2>
-                    </div>
+                    </div>*/}
                 </div>
                 <div className="back">
-                    <div className="img">
+                    {/*<div className="img">
                         <img src={backImgUrl} alt='Sth'/>
-                    </div>  
+                    </div>*/}  
                     <div className="detail-box">
-                        <h2>Brand: {brand}</h2>
-                        <br/>
-                        <h2>Remaining: {remainNumber}</h2>
+                        <h1>{name}</h1>
+                        <h2>{brand}</h2>
+                        <h2>Remain: {remainNumber}</h2>
                     </div>
                 </div>
             </div>
