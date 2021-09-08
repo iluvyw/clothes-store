@@ -9,45 +9,31 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { SlideWrapper } from "../../style";
 
-const query = (brand) => brand ? `*[_type == "clothing" && brand->.name=="${brand}"]{
-  _id,
-  name,
-  slug,
-  front_image{
-    asset->{
-      _id,
-      url
-    }
-  },
-  back_image{
-    asset->{
-      _id,
-      url
-    }
-  },
-  'brand': brand->.name,
-  remainNumber,
-  'brandLogoUrl': brand->.logo.asset->.url
-}`: `*[_type == "clothing"]{
-  _id,
-  name,
-  slug,
-  front_image{
-    asset->{
-      _id,
-      url
-    }
-  },
-  back_image{
-    asset->{
-      _id,
-      url
-    }
-  },
-  'brand': brand->.name,
-  remainNumber,
-  'brandLogoUrl': brand->.logo.asset->.url
-}`
+const query = (brand, category) => {
+  let query = `*[_type == "clothing"`
+  if (brand){
+    query = query +  `&& brand->.name=="${brand}"`
+  }
+  if (category){
+    query = query + `&& category=="${category}"`
+  }
+  query = query + `]{
+    _id,
+    name,
+    slug,
+    front_image{
+      asset->{
+        _id,
+        url
+      }
+    },
+    'brand': brand->.name,
+    remainNumber,
+    price,
+    'brandLogoUrl': brand->.logo.asset->.url
+  }`
+  return query
+}
 
 const breakpoint = [
   {width: 1, itemsToShow: 1},
@@ -63,16 +49,16 @@ const settings = {
   autoplaySpeed: 2000,
 }
 
-function CardView({ brand }) {
+function CardView({ brand, category }) {
   const [allCards,setAllCards] = useState(null)
   const a = 1
 
   useEffect(() => {
-    SanityClient.fetch(query(brand))
+    SanityClient.fetch(query(brand, category))
     .then((data) => setAllCards(data))
-    .then(console.log(brand))
+    .then(console.log('Card view ',query(brand,category)))
     .catch(console.error)
-  }, [brand])
+  }, [brand, category])
 
   return (
     <div className="body">
@@ -91,7 +77,7 @@ function CardView({ brand }) {
             allCards && allCards.map(item => 
               <div>
                 <Link to={"/"+item.slug.current} key={item.slug.current}>
-                  <Card key={item._id} name={item.name} frontImgUrl={item.front_image.asset.url} backImgUrl={item.back_image.asset.url} brand={item.brand} remainNumber={item.remainNumber}/>
+                  <Card key={item._id} name={item.name} frontImgUrl={item.front_image.asset.url} brand={item.brand} remainNumber={item.remainNumber} price={item.price}/>
                 </Link>
               </div>
             )

@@ -9,20 +9,23 @@ const get_brand_query = `*[_type=="brand"]{name}`
 export default function Home() {
     const [brandList, setBrandList] = useState([])
     const [selectedBrand, setSelectedBrand] = useState("")
+    const [categoryList, setCategoryList] = useState([{name: "Tops"},{name: "Bottoms"},{name: "Skirts & Dresses"},{name: "Accessories"}])
+    const [selectedCategory, setSelectedCategory] = useState("")
 
     useEffect(() => {
         SanityClient.fetch(get_brand_query)
             .then(data => setBrandList(data))
-        //.then(console.log(selectedBrand))
-    }, [selectedBrand])
+            .then(console.log(selectedBrand,selectedCategory))
+    },[])
 
     return (
         <div className="background">
             <section className="drop-down-container">
-                <DropDownList list={brandList} select={setSelectedBrand} />
+                <DropDownList fieldName={'Brand'} list={brandList} select={setSelectedBrand} />
+                <DropDownList fieldName={'Category'} list={categoryList} select={setSelectedCategory} />
             </section>
             <section className="card-section">
-                <CardView brand={selectedBrand} />
+                {<CardView brand={selectedBrand} category={selectedCategory}/>}
             </section>
             <footer>
                 <a href="https://www.facebook.com/an.phamhoang.1/">

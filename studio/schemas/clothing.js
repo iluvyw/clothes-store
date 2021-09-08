@@ -18,6 +18,11 @@ export default {
             }
         },
         {
+            name: "price",
+            title: "Price",
+            type: "number"
+        },
+        {
             name: "front_image",
             title: "Front Image",
             type: "image",
@@ -26,8 +31,32 @@ export default {
             }
         },
         {
-            name: "back_image",
-            title: "Back Image",
+            name: "image1",
+            title: "First Image",
+            type: "image",
+            options: {
+                hotspot: true
+            }
+        },
+        {
+            name: "image2",
+            title: "Second Image",
+            type: "image",
+            options: {
+                hotspot: true
+            }
+        },
+        {
+            name: "image3",
+            title: "Third Image",
+            type: "image",
+            options: {
+                hotspot: true
+            }
+        },
+        {
+            name: "image4",
+            title: "Product Image",
             type: "image",
             options: {
                 hotspot: true
@@ -40,6 +69,20 @@ export default {
             to: [{ type: "brand" }]
         },
         {
+            name: "category",
+            title: "Category",
+            type: "string",
+            options: {
+                list: [
+                  {title: 'Tops', value: 'Tops'},
+                  {title: 'Bottoms', value: 'Bottoms'},
+                  {title: 'Skirts & Dresses', value: "Skirts & Dresses"},
+                  {title: 'Accessories', value: "Accessories"}
+                ], // <-- predefined values
+                layout: 'Category' // <-- defaults to 'dropdown'
+            }
+        },
+        {
             name: "remainNumber",
             title: "Ramaining Number",
             type: "number"
@@ -47,6 +90,11 @@ export default {
         {
             name: "madeIn",
             title: "Made In",
+            type: "string"
+        },
+        {
+            name: "note",
+            title: "Note",
             type: "string"
         }
     ]

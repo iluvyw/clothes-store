@@ -1,7 +1,7 @@
 import React from 'react'
 import './DropDownList.css'
 
-export default function DropDownList({ list, select }) {
+export default function DropDownList({ fieldName ,list, select }) {
     const handleChange = (e) => {
         select(e.target.value)
     }
@@ -9,7 +9,7 @@ export default function DropDownList({ list, select }) {
     return (
         <div>
             <select onChange={handleChange}>
-                <option value={""}>Select Brand</option>
+                <option value={""}>Select {fieldName}</option>
                 {
                     list && list.map(item => 
                         <option key={item.name} value={item.name}>

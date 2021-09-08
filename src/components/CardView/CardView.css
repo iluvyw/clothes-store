@@ -5,9 +5,15 @@
 
 .body {
     background-color: #eef8ff;
-    width: 100%;
+    display: flex;
+    width: calc(100vw - 80px);
     height: 100%;
-    /*display: flex;*/
-    align-items: center;
-    position: relative;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider-wrapper {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
 }

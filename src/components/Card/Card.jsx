@@ -1,7 +1,12 @@
+import { useEffect } from 'react'
 import Image from '../../assets/img-test.jpeg'
 import './Card.css'
 
-export default function Card({ name, frontImgUrl, backImgUrl, brand, remainNumber }) {
+export default function Card({ name, frontImgUrl, price, brand, remainNumber }) {
+    useEffect(()=>{
+        console.log('Card',name)
+    },[])
+    
     return (
         <div className="box">
             <div className="card">
@@ -21,6 +26,7 @@ export default function Card({ name, frontImgUrl, backImgUrl, brand, remainNumbe
                         <h1>{name}</h1>
                         <h2>{brand}</h2>
                         <h2>Remain: {remainNumber}</h2>
+                        <h2>Price: {price}$</h2>
                     </div>
                 </div>
             </div>
