@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Oswald:wght@300&display=swap');
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: flex-start;
+}
+
+.container .image-section {
+    position: fixed;
+    /*margin-top: 40px;*/
+    width: 70%;
+    height: 100%;
+    display: block;
+    overflow: scroll;
+}
+
+.container .info-section {
+    position: fixed;
+    width: 28%;
+    background-color: #aa96da;
+    margin-left: 70%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    text-align: center;
+    padding: 10px 20px;
+    height: 100%;
+    overflow: auto;
+}
+
+.container .image-section .image-box {
+    width: 100%;
+    object-fit: cover;
+    margin: 0px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: wheat;
+}
+
+.title h3 {
+    font-size: 60px;
+    text-align: center;
+    font-family: 'Noto Sans', sans-serif;
+    margin-top: 60px;
+    color: #ffffd2;
+    transition: all 1s ease;
+}
+
+section {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+section h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    color: #c5fad5;
+}

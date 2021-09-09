@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
-import Image from '../../assets/img-test.jpeg'
 import './Card.css'
 
 export default function Card({ name, frontImgUrl, price, brand, remainNumber }) {
     useEffect(()=>{
-        console.log('Card',name)
+        //console.log('Card',name)
     },[])
     
     return (
