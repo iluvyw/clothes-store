@@ -12,6 +12,7 @@ import image_6 from "../../assets/6.jpg"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import BagItem from '../../components/BagItem/BagItem'
 
 const get_brand_query = `*[_type=="brand"]{name}`
 
@@ -22,7 +23,7 @@ const settings = {
     autoplaySpeed: 2000,
   }
 
-export default function Home() {
+export default function Home({ bagItems }) {
     const [brandList, setBrandList] = useState([])
     const [selectedBrand, setSelectedBrand] = useState("")
     const [categoryList, setCategoryList] = useState([{ name: "Tops" }, { name: "Bottoms" }, { name: "Skirts & Dresses" }, { name: "Accessories" }])
@@ -31,7 +32,7 @@ export default function Home() {
     useEffect(() => {
         SanityClient.fetch(get_brand_query)
             .then(data => setBrandList(data))
-            .then(console.log(selectedBrand, selectedCategory))
+            .then(console.log('Home rerender'))
     }, [])
 
     return (
@@ -39,7 +40,7 @@ export default function Home() {
             <section className="get-start">
                 <div className="main-title">
                     <h1>SHOPPING</h1>
-                    <a href="#main">Start</a>
+                    <a href="#shop">Start</a>
                 </div>
                 <div className="background">
                     <Slider {...settings}>
@@ -51,14 +52,20 @@ export default function Home() {
                     </Slider>
                 </div>
             </section>
-            <section id="main">
+            <section id="shop">
                 <section className="drop-down-container">
                     <DropDownList fieldName={'Brand'} list={brandList} select={setSelectedBrand} />
                     <DropDownList fieldName={'Category'} list={categoryList} select={setSelectedCategory} />
+                    <a href="#bag" className="button-view-bag">View Your Bag</a>
                 </section>
                 <section className="card-section">
                     {<CardView brand={selectedBrand} category={selectedCategory} />}
                 </section>
+            </section>
+            <section className="bag" id="bag">
+                <a href="#shop">Back to shop</a>
+                <h1>BAG</h1>
+                {bagItems ? bagItems.map(item => <BagItem name={item.name} brand={item.brand} slug={item.slug} imageUrl={item.imageUrl} number={item.number}/>) : <h1>Empty</h1>}
             </section>
             <footer>
                 <a href="https://www.facebook.com/an.phamhoang.1/">

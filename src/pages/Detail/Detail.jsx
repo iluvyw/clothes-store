@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import SanityClient from '../../client'
 import './Detail.css'
+import { BagItem } from '../../bag'
+import { Link, useHistory } from 'react-router-dom'
 
-const settings = {
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-}
-
-export default function Detail({ match }) {
+export default function Detail({ match, bagItems, setBagItems }) {
     const [product, setProduct] = useState(null)
+    const [inputValue,setInputValue] = useState(1)
 
     const query = (slug) => {
         return `*[_type=="clothing" && slug.current=="${slug}"][0]{
@@ -49,10 +45,21 @@ export default function Detail({ match }) {
         }`
     }
 
+    let history = useHistory()
+
+    const toHome = () => {
+        history.push('/')
+    }
+
     useEffect(() => {
         SanityClient.fetch(query(match.params.slug))
             .then(data => setProduct(data))
+            .then(console.log('Detail rerender'))
     }, [])
+
+    const onInputChange = (e) => {
+        setInputValue(e.target.value);
+    }
 
     /*if (!product) return (
         <div></div>
@@ -98,9 +105,16 @@ export default function Detail({ match }) {
                     <h1>Category</h1>
                     <h3>{product && product.category}</h3>
                 </section>
-                {/*<section>
-                    <button>return</button>
-                </section>*/}
+                <section>
+                    <input value={inputValue} className="input" type="number" onChange={onInputChange} placeholder="How many you want to buy?"/>
+                </section>
+                <section>
+                    <button className="button" onClick={() => {
+                        (product && setBagItems([...bagItems,BagItem(product.name,product.brand,match.params.slug,product.front_image.asset.url,inputValue)]))
+                        toHome()
+                        //console.log('button clicked')
+                    }} >Add To Cart</button>
+                </section>
             </section>
         </div>
     )

@@ -4,15 +4,15 @@
     height: 10vh;
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding: 0px 50px;
 }
 
 .home-background {
     width: 100vw;
     height: 100%;
-    overflow: scroll;
-    scroll-snap-type: y mandatory;
-    transition: all 4s ease;
+    overflow: hidden;
+    background-color: #eef8ff;
 }
 
 footer {
@@ -90,4 +90,39 @@ html {
 
 .home-background section{
     scroll-snap-align: start;
+}
+
+.bag {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ec4d37;
+    overflow: scroll;
+}
+
+.bag h1 {
+    color: #1d1b1b;
+    font-size: 80px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.button-view-bag {
+    padding: 8px 12px;
+    color: #333333;
+    background-color: #eeeeee;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 20px;
+    text-align: center;
+}
+
+.bag a{
+    text-decoration: none;
+    padding-top: 10px;
+    color: #1d1b1b;
+    font-size: 20px;
 }

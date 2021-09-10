@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Oswald:wght@300&display=swap');
+
+.item-box {
+    background-color: #1d1b1b;
+    width: 1000px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.item-box img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    padding: 10px 20px;
+}
+
+.item-box .detail{
+    padding: 20px 20px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item-box .detail h2{
+    color: #ec4d37;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 25px;
+}
+
+.item-box .detail h3{
+    padding-top: 10px;
+    font-size: 20px;
+    color: #ec4d37;
+}
+
+.number {
+    width: 100px;
+}
+
+.item-box .number{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: #ec4d37;
+    font-family: 'Noto Sans', sans-serif;
+}
