@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SanityClient from '../../client'
 import './Detail.css'
 import { BagItem } from '../../bag'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export default function Detail({ match, bagItems, setBagItems }) {
     const [product, setProduct] = useState(null)
@@ -48,7 +48,7 @@ export default function Detail({ match, bagItems, setBagItems }) {
     let history = useHistory()
 
     const toHome = () => {
-        history.push('/')
+        history.goBack()
     }
 
     useEffect(() => {
@@ -69,16 +69,16 @@ export default function Detail({ match, bagItems, setBagItems }) {
         <div className="container">
             <section className="image-section">
                 <div className="image-box">
-                    <img className="image" src={product && product.front_image.asset.url} alt="front image" />
+                    <img className="image" src={product && product.front_image.asset.url} alt="front" />
                 </div>
                 <div className="image-box">
-                    <img className="image" src={product && product.image1.asset.url} alt="first image" />
+                    <img className="image" src={product && product.image1.asset.url} alt="first" />
                 </div>
                 <div className="image-box">
-                    <img className="image" src={product && product.image2.asset.url} alt="second image" />
+                    <img className="image" src={product && product.image2.asset.url} alt="second" />
                 </div>
                 <div className="image-box">
-                    <img className="image" src={product && product.image3.asset.url} alt="third image" />
+                    <img className="image" src={product && product.image3.asset.url} alt="third" />
                 </div>
             </section>
             <section className="info-section">

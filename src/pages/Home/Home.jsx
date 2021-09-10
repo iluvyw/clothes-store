@@ -6,7 +6,6 @@ import './Home.css'
 import image_1 from "../../assets/1.jpg"
 import image_2 from "../../assets/2.jpg"
 import image_3 from "../../assets/3.jpg"
-import image_4 from "../../assets/4.jpg"
 import image_5 from "../../assets/5.jpg"
 import image_6 from "../../assets/6.jpg"
 import "slick-carousel/slick/slick.css";
@@ -32,7 +31,7 @@ export default function Home({ bagItems }) {
     useEffect(() => {
         SanityClient.fetch(get_brand_query)
             .then(data => setBrandList(data))
-            .then(console.log('Home rerender'))
+            //.then(console.log('Home rerender'))
     }, [])
 
     return (
@@ -69,16 +68,16 @@ export default function Home({ bagItems }) {
             </section>
             <footer>
                 <a href="https://www.facebook.com/an.phamhoang.1/">
-                    <i class="fab fa-facebook"></i>
+                    <i className="fab fa-facebook"></i>
                 </a>
                 <a href="https://www.instagram.com/anpham2408/">
-                    <i class="fab fa-instagram"></i>
+                    <i className="fab fa-instagram"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/an-ph%E1%BA%A1m-43203a199/">
-                    <i class="fab fa-linkedin"></i>
+                    <i className="fab fa-linkedin"></i>
                 </a>
                 <a href="https://github.com/iluvyw">
-                    <i class="fab fa-github"></i>
+                    <i className="fab fa-github"></i>
                 </a>
             </footer>
         </div>

@@ -1,10 +1,8 @@
-import CardView from "./components/CardView/CardView"
 import Detail from "./pages/Detail/Detail";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import './App.css'
 import { useEffect, useState } from "react";
-import { BagItem } from "./bag";
 
 function App() {
   const [bagItems,setBagItems] = useState([])

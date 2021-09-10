@@ -6,7 +6,7 @@ export default function BagItem({ name, brand, slug, imageUrl, number }) {
     return (
         <Link to={"/" + slug}>
             <div className="item-box">
-                <img src={imageUrl} />
+                <img src={imageUrl} alt="small"/>
                 <div className="detail">
                     <h2>{name}</h2>
                     <h3>{brand}</h3>
