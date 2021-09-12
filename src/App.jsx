@@ -1,24 +1,41 @@
 import Detail from "./pages/Detail/Detail";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import './App.css'
-import { useEffect, useState } from "react";
+import React from "react";
 
-function App() {
-  const [bagItems,setBagItems] = useState([])
+export default class App extends React.Component {
 
-  useEffect(() => {
-    console.log('rerender')
-  }, [])
+  constructor() {
+    super()
+    this.state = {
+      bagItems: []
+    }
+  }
 
-  return (
-    <BrowserRouter>
+  componentDidUpdate(){
+  }
+
+  render() {
+    const addItem = (item) => {
+      this.setState({ ...this.state, bagItems: [...this.state.bagItems, item] })
+    }
+
+    console.log("rerender")
+
+    return (
       <div className="background">
-        <Route component={() => <Home bagItems={bagItems}/>} path="/" exact/>
-        <Route component={(props) => <Detail {...props} bagItems={bagItems} setBagItems={setBagItems}/>} path="/:slug" />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact>
+              <Home key="Home" bagItems={this.state.bagItems} />
+            </Route>
+            <Route path="/:slug" >
+              <Detail key="detail" setBagItems={addItem} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
       </div>
-    </BrowserRouter>
-  );
+    );
+  }
 }
-
-export default App;

@@ -47,7 +47,7 @@ function CardView({ brand, category }) {
   useEffect(() => {
     SanityClient.fetch(query(brand, category))
       .then((data) => setAllCards(data))
-      .then(console.log('Card view rerender'))
+      //.then(console.log('Card view rerender'))
       .catch(console.error)
   }, [brand, category])
 
