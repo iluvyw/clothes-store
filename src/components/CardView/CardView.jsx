@@ -1,8 +1,8 @@
 import Card from "../Card/Card";
 import './CardView.css'
 import SanityClient from '../../client'
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -41,37 +41,50 @@ const settings = {
   autoplaySpeed: 2000,
 }
 
-function CardView({ brand, category }) {
-  const [allCards, setAllCards] = useState(null)
+class CardView extends React.Component {
 
-  useEffect(() => {
-    SanityClient.fetch(query(brand, category))
-      .then((data) => setAllCards(data))
-      //.then(console.log('Card view rerender'))
-      .catch(console.error)
-  }, [brand, category])
-
-  let history = useHistory()
-
-  const nextPage = (slug) => {
-    history.push(`./${slug}`)
+  constructor(props){
+    super(props)
+    this.state = {
+      allCards: null
+    }
   }
 
-  return (
-    <div className="body">
-      <SlideWrapper>
-        <Slider {...settings}>
-          {
-            allCards && allCards.map(item =>
-              <div onClick={() => nextPage(item.slug.current)} key={item.slug.current}>
-                <Card key={item._id} name={item.name} frontImgUrl={item.front_image.asset.url} brand={item.brand} remainNumber={item.remainNumber} price={item.price} />
-              </div>
-            )
-          }
-        </Slider>
-      </SlideWrapper>
-    </div>
-  );
+  componentDidMount(){
+    SanityClient.fetch(query(this.props.brand, this.props.category))
+    .then((data) => this.setState({...this.state,allCards: data}))
+    .catch(console.error)
+  }
+
+  componentDidUpdate(prevProps){
+    if ((prevProps.brand !== this.props.brand) || (prevProps.category !== this.props.category)){
+      SanityClient.fetch(query(this.props.brand, this.props.category))
+      .then((data) => this.setState({...this.state,allCards: data}))
+      .catch(console.error)
+    }
+  }
+
+  render(){
+    const nextPage = (slug) => {
+      this.props.history.push(`./${slug}`)
+    }
+
+    return (
+      <div className="body">
+        <SlideWrapper>
+          <Slider {...settings}>
+            {
+              this.state.allCards && this.state.allCards.map(item =>
+                <div onClick={() => nextPage(item.slug.current)} key={item.slug.current}>
+                  <Card key={item._id} name={item.name} frontImgUrl={item.front_image.asset.url} brand={item.brand} remainNumber={item.remainNumber} price={item.price} />
+                </div>
+              )
+            }
+          </Slider>
+        </SlideWrapper>
+      </div>
+    );
+  }
 }
 
-export default CardView;
+export default withRouter(CardView)

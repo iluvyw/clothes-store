@@ -21,8 +21,6 @@ export default class App extends React.Component {
       this.setState({ ...this.state, bagItems: [...this.state.bagItems, item] })
     }
 
-    console.log("rerender")
-
     return (
       <div className="background">
         <BrowserRouter>

@@ -56,7 +56,6 @@ class Detail extends React.Component {
     }
 
     shouldComponentUpdate(nextProp,nextState){
-        console.log('a')
         for (let key in nextState){
             if (nextState[key] !== this.state[key])
                 return true
@@ -65,14 +64,24 @@ class Detail extends React.Component {
     }
 
     render() {
-        const toHome = () => {
-            this.props.history.goBack()
-        }
+        // const toHome = () => {
+        //     this.props.history.goBack()
+        // }
 
         const onInputChange = (e) => {
-            const value = Math.max(1,Math.min(20,parseInt(e.target.value)))
+            const value = Math.max(1,Math.min(this.state.product.remainNumber,parseInt(e.target.value)))
             this.setState({...this.state,inputValue:value})
         }
+
+        // const changeRemainNumber = async (num) => {
+        //     await SanityClient
+        //         .patch(this.state.product._id)
+        //         .dec({remainNumber: num})
+        //         .commit()
+        //         .then(() => console.log('Update done'))
+        //         .catch(() => console.error())
+        // }
+        
 
         return (
             <div className="container">
@@ -119,6 +128,8 @@ class Detail extends React.Component {
                     </section>
                     <section>
                         <button className="button" onClick={() => {
+                            //changeRemainNumber(this.state.inputValue);
+                            //console.log(this.state.inputValue);
                             (this.state.product && this.props.setBagItems(BagItem(this.state.product.name, this.state.product.brand, this.props.match.params.slug, this.state.product.front_image.asset.url, this.state.inputValue)))
                             //toHome()
                         }} >Add To Cart</button>

@@ -24,8 +24,8 @@ const settings = {
 
 export default class Home extends React.Component {
 
-    constructor({ bagItems }) {
-        super({ bagItems })
+    constructor(props) {
+        super(props)
         this.state = {
             brandList: [],
             selectedBrand: "",
@@ -37,7 +37,7 @@ export default class Home extends React.Component {
     componentDidMount() {
         SanityClient.fetch(get_brand_query)
             .then(data => this.setState({...this.state,brandList:data}))
-            .then(console.log(this.state.selectedBrand, this.state.selectedCategory))
+            //.then(console.log(this.state.selectedBrand, this.state.selectedCategory))
     }
 
     render(){
@@ -71,7 +71,7 @@ export default class Home extends React.Component {
                 <section className="bag" id="bag">
                     <a href="#shop">Back to shop</a>
                     <h1>BAG</h1>
-                    {this.props.bagItems ? this.props.bagItems.map(item => <BagItem name={item.name} brand={item.brand} slug={item.slug} imageUrl={item.imageUrl} number={item.number} />) : <h1>Empty</h1>}
+                    {this.props.bagItems ? this.props.bagItems.map(item => <BagItem key={Math.random()*1000000} name={item.name} brand={item.brand} slug={item.slug} imageUrl={item.imageUrl} number={item.number} />) : <h1>Empty</h1>}
                 </section>
                 <footer>
                     <a href="https://www.facebook.com/an.phamhoang.1/">
