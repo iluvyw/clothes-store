@@ -4,6 +4,6 @@ export default SanityClient({
     projectId: "gqwdproo",
     dataset: "clothes",
     apiVersion: '2021-08-31',
-    token: process.env.SANITY_WRITE_TOKEN,
+    token: process.env.REACT_APP_SANITY_WRITE_TOKEN,
     useCdn: false
 })
