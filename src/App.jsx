@@ -18,7 +18,21 @@ export default class App extends React.Component {
 
   render() {
     const addItem = (item) => {
-      this.setState({ ...this.state, bagItems: [...this.state.bagItems, item] })
+      let temp = this.state.bagItems.filter(element => element.id === item.id)
+      if (temp.length > 0){
+        const num = item.number
+        let items = this.state.bagItems
+        for (let i=0;i<items.length;i++){
+          if (items[i].id === item.id){
+            items[i].number += num
+            this.setState({...this.state, bagItems: items})
+            break
+          }
+        }
+      }
+      else{
+        this.setState({ ...this.state, bagItems: [...this.state.bagItems, item] })
+      }
     }
 
     const deleteItem = (id) => {

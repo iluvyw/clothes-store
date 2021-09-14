@@ -8,7 +8,7 @@ export default class BagItem extends React.Component {
         super(props)
         this.state = {}
     }
-
+    
     render() {
         return (
             <div>
@@ -27,7 +27,7 @@ export default class BagItem extends React.Component {
                         <h4 className="button-x" onClick={() => {
                             this.props.deleteItem(this.props.id)
                             this.props.restoreRemain(this.props.id, this.props.number)
-                            console.log(this.props.id, this.props.number)
+                            //console.log(this.props.id, this.props.number)
                         }}>X</h4>
                     </div>
                 </div>

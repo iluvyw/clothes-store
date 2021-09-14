@@ -10,6 +10,16 @@ export default class DropDownList extends React.Component {
         }
     }
 
+    componentDidMount(){
+    }
+
+    shouldComponentUpdate(prevProp,prevState){
+        if (prevProp.list !== this.props.list){
+            return true
+        }
+        return false
+    }
+
     render(){
         const handleChange = (e) => {
             this.setState({...this.state, select: e.target.value})

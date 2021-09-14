@@ -40,6 +40,22 @@ export default class Home extends React.Component {
             //.then(console.log(this.state.selectedBrand, this.state.selectedCategory))
     }
 
+    shouldComponentUpdate(nextProp,nextState){
+        if (nextState.brandList !== this.state.brandList){
+            return true
+        }
+        if (nextState.selectedBrand !== this.state.selectedBrand){
+            return true
+        }
+        if (nextState.selectedCategory !== this.state.selectedCategory){
+            return true
+        }
+        if (nextProp.bagItems !== this.props.bagItems){
+            return true
+        }
+        return false
+    }
+
     render(){
         const restoreRemain = async (id, num) => {
             await SanityClient
