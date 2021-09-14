@@ -41,6 +41,15 @@ export default class Home extends React.Component {
     }
 
     render(){
+        const restoreRemain = async (id, num) => {
+            await SanityClient
+                .patch(id)
+                .inc({remainNumber: num})
+                .commit()
+                //.then(() => console.log('Update done'))
+                .catch(() => console.error())
+        }
+
         return (
             <div className="home-background">
                 <section className="get-start">
@@ -71,7 +80,7 @@ export default class Home extends React.Component {
                 <section className="bag" id="bag">
                     <a href="#shop">Back to shop</a>
                     <h1>BAG</h1>
-                    {this.props.bagItems ? this.props.bagItems.map(item => <BagItem key={Math.random()*1000000} name={item.name} brand={item.brand} slug={item.slug} imageUrl={item.imageUrl} number={item.number} />) : <h1>Empty</h1>}
+                    {this.props.bagItems && (this.props.bagItems.length > 0 ? this.props.bagItems.map(item => <BagItem key={Math.random()*1000000} id={item.id} name={item.name} brand={item.brand} slug={item.slug} imageUrl={item.imageUrl} number={item.number} deleteItem={this.props.deleteItem} restoreRemain={restoreRemain}/>) : <h1 className="text-empty">Your bag is empty</h1>)}
                 </section>
                 <footer>
                     <a href="https://www.facebook.com/an.phamhoang.1/">

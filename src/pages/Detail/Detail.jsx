@@ -46,13 +46,17 @@ class Detail extends React.Component {
         super(props)
         this.state = {
             inputValue: 0,
-            product: null
+            product: null,
+            remain: 0
         }
     }
 
     componentDidMount(){
         SanityClient.fetch(query(this.props.match.params.slug))
-            .then(data => this.setState({...this.state, product:data}))
+            .then(data => {
+                this.setState({...this.state, product:data})
+                this.setState({...this.state, remain: data.remainNumber})
+        })
     }
 
     shouldComponentUpdate(nextProp,nextState){
@@ -69,7 +73,7 @@ class Detail extends React.Component {
         }
 
         const onInputChange = (e) => {
-            const value = Math.max(0,Math.min(this.state.product.remainNumber,parseInt(e.target.value)))
+            const value = Math.max(0,Math.min(this.state.remain,parseInt(e.target.value)))
             this.setState({...this.state,inputValue:value})
         }
 
@@ -82,7 +86,7 @@ class Detail extends React.Component {
                 .patch(this.state.product._id)
                 .dec({remainNumber: num})
                 .commit()
-                .then(() => console.log('Update done'))
+                //.then(() => console.log('Update done'))
                 .catch(() => console.error())
         }
         
@@ -134,8 +138,10 @@ class Detail extends React.Component {
                         <button className="button" onClick={() => {
                             if (this.state.inputValue > 0) {
                                 changeRemainNumber(this.state.inputValue);
+                                // let newRemain = this.state.remain - this.state.inputValue
+                                // this.setState({...this.state, remain: newRemain});
                                 resetInput();
-                                (this.state.product && this.props.setBagItems(BagItem(this.state.product.name, this.state.product.brand, this.props.match.params.slug, this.state.product.front_image.asset.url, this.state.inputValue)))
+                                (this.state.product && this.props.setBagItems(BagItem(this.state.product._id ,this.state.product.name, this.state.product.brand, this.props.match.params.slug, this.state.product.front_image.asset.url, this.state.inputValue)))
                             }
                         }} >Add To Cart</button>
                         <button className="button" onClick={() => {

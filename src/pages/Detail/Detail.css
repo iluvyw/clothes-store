@@ -81,6 +81,12 @@ section h1 {
     background-color: #ffffd2;
     border: 0px;
     box-shadow: 2px 2px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: black;
+    color: #ffffd2;
 }
 
 .input {

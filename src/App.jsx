@@ -21,12 +21,16 @@ export default class App extends React.Component {
       this.setState({ ...this.state, bagItems: [...this.state.bagItems, item] })
     }
 
+    const deleteItem = (id) => {
+      this.setState({...this.state, bagItems: this.state.bagItems.filter(item => item.id !== id)})
+    }
+
     return (
       <div className="background">
         <BrowserRouter>
           <Switch>
             <Route path="/" exact>
-              <Home key="Home" bagItems={this.state.bagItems} />
+              <Home key="Home" bagItems={this.state.bagItems} deleteItem={deleteItem}/>
             </Route>
             <Route path="/:slug" >
               <Detail key="detail" setBagItems={addItem} />

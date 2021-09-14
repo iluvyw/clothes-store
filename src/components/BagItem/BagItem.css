@@ -17,7 +17,7 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
 
 .item-box .detail{
@@ -52,4 +52,19 @@
     font-size: 30px;
     color: #ec4d37;
     font-family: 'Noto Sans', sans-serif;
+}
+
+.item-box .button-x{
+    color: #ec4d37;
+    background-color: #1d1b1b;
+    font-family: 'Noto Sans', sans-serif;
+    text-decoration: nones;
+    cursor: pointer;
+    padding-right: 5px;
+    padding-top: 5px;
+    z-index: 10;
+}
+
+.bag .text-empty {
+    font-size: 40px;
 }
