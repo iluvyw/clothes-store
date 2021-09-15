@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import './App.css'
 import React from "react";
+import SanityClient from './client';
 
 export default class App extends React.Component {
 
@@ -11,9 +12,30 @@ export default class App extends React.Component {
     this.state = {
       bagItems: []
     }
+    this.componentCleanUp = this.componentCleanUp.bind(this)
   }
 
-  componentDidUpdate(){
+  componentWillMount(){
+    console.log('App mount',this.state.bagItems)
+  }
+
+  componentDidMount(){
+    window.addEventListener('beforeunload', () => this.componentCleanUp())
+  }
+
+  componentCleanUp(){
+    this.state.bagItems.forEach(item => {
+      SanityClient
+        .patch(item.id)
+        .inc({ remainNumber: item.number })
+        .commit()
+        .catch(() => console.error());
+    });
+  }
+
+  componentWillUnmount(){
+    this.componentCleanUp()
+    window.removeEventListener('beforeunload', () => this.componentCleanUp())
   }
 
   render() {
