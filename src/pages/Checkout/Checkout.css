@@ -1,0 +1,21 @@
+.checkout {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: white;
+    text-align: center;
+}
+
+.checkout-item {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.checkout-item h1{
+    margin-right: 50px;
+}
+
+h1 {
+    background-color: white;
+}

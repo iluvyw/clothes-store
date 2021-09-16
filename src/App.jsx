@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import './App.css'
 import React from "react";
 import SanityClient from './client';
+import Checkout from "./pages/Checkout/Checkout";
 
 export default class App extends React.Component {
 
@@ -67,6 +68,9 @@ export default class App extends React.Component {
           <Switch>
             <Route path="/" exact>
               <Home key="Home" bagItems={this.state.bagItems} deleteItem={deleteItem}/>
+            </Route>
+            <Route path="/checkout" exact>
+              <Checkout bagItems={this.state.bagItems}/>
             </Route>
             <Route path="/:slug" >
               <Detail key="detail" setBagItems={addItem} />

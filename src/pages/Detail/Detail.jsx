@@ -44,6 +44,7 @@ const query = (slug) => {
 class Detail extends React.Component {
     constructor(props) {
         super(props)
+        this.isComponentMounted = false
         this.state = {
             inputValue: 0,
             product: null,
@@ -51,12 +52,18 @@ class Detail extends React.Component {
         }
     }
 
-    componentDidMount(){
-        SanityClient.fetch(query(this.props.match.params.slug))
+    async componentDidMount(){
+        this.isComponentMounted = true
+        try {
+            await SanityClient.fetch(query(this.props.match.params.slug))
             .then(data => {
                 this.setState({...this.state, product:data})
                 this.setState({...this.state, remain: data.remainNumber})
-        })
+            })
+        }
+        catch (error) {
+            console.log('Fetch error')
+        }
     }
 
     shouldComponentUpdate(nextProp,nextState){
@@ -65,6 +72,10 @@ class Detail extends React.Component {
                 return true
         }
         return false
+    }
+
+    componentWillUnmount(){
+        this.isComponentMounted = false
     }
 
     render() {
@@ -141,7 +152,7 @@ class Detail extends React.Component {
                                 // let newRemain = this.state.remain - this.state.inputValue
                                 // this.setState({...this.state, remain: newRemain});
                                 resetInput();
-                                (this.state.product && this.props.setBagItems(BagItem(this.state.product._id ,this.state.product.name, this.state.product.brand, this.props.match.params.slug, this.state.product.front_image.asset.url, this.state.inputValue)))
+                                (this.state.product && this.props.setBagItems(BagItem(this.state.product._id ,this.state.product.price ,this.state.product.name, this.state.product.brand, this.props.match.params.slug, this.state.product.front_image.asset.url, this.state.inputValue)))
                             }
                         }} >Add To Cart</button>
                         <button className="button" onClick={() => {

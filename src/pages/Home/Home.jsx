@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import BagItem from '../../components/BagItem/BagItem'
+import { withRouter } from 'react-router-dom'
 
 const get_brand_query = `*[_type=="brand"]{name}`
 
@@ -22,10 +23,11 @@ const settings = {
     autoplaySpeed: 2000,
 }
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 
     constructor(props) {
         super(props)
+        this.isComponentMounted = false
         this.state = {
             brandList: [],
             selectedBrand: "",
@@ -34,10 +36,17 @@ export default class Home extends React.Component {
         }
     }
 
-    componentDidMount() {
-        SanityClient.fetch(get_brand_query)
-            .then(data => this.setState({...this.state,brandList:data}))
-            //.then(console.log(this.state.selectedBrand, this.state.selectedCategory))
+    async componentDidMount() {
+        this.isComponentMounted = true
+        try {
+            await SanityClient.fetch(get_brand_query)
+                .then(data => this.setState({...this.state,brandList:data}))
+                //.then(console.log(this.state.selectedBrand, this.state.selectedCategory))
+    
+            }
+        catch (error) {
+            console.log('Fetch Error')
+        }
     }
 
     shouldComponentUpdate(nextProp,nextState){
@@ -54,6 +63,10 @@ export default class Home extends React.Component {
             return true
         }
         return false
+    }
+
+    componentWillUnmount(){
+        this.isComponentMounted = false
     }
 
     render(){
@@ -97,6 +110,7 @@ export default class Home extends React.Component {
                     <a href="#shop">Back to shop</a>
                     <h1>BAG</h1>
                     {this.props.bagItems && (this.props.bagItems.length > 0 ? this.props.bagItems.map(item => <BagItem key={Math.random()*1000000} id={item.id} name={item.name} brand={item.brand} slug={item.slug} imageUrl={item.imageUrl} number={item.number} deleteItem={this.props.deleteItem} restoreRemain={restoreRemain}/>) : <h1 className="text-empty">Your bag is empty</h1>)}
+                    <button className="checkout-button" onClick={() => this.props.history.push('/checkout')}>Check Out</button>
                 </section>
                 <footer>
                     <a href="https://www.facebook.com/an.phamhoang.1/">
@@ -116,3 +130,5 @@ export default class Home extends React.Component {
         )
     }
 }
+
+export default withRouter(Home)
