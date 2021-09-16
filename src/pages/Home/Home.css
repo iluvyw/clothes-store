@@ -99,7 +99,8 @@ html {
     flex-direction: column;
     align-items: center;
     background-color: #ec4d37;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .bag h1 {
